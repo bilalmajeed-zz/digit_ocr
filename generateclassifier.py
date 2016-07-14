@@ -1,5 +1,5 @@
 from sklearn.externals import joblib
-from sklearn import datasets 
+from sklearn import datasets, svm
 from skimage.feature import hog
 from sklearn.svm import LinearSVC
 import numpy as np
@@ -17,6 +17,6 @@ for feature in features:
     list_hog_fd.append(fd)
 hog_features = np.array(list_hog_fd, 'float64')
 
-clf = LinearSVC()
+clf = svm.SVC(gamma=0.001, C=100)
 clf.fit(hog_features, labels)
 joblib.dump(clf, "digits_cls.pkl", compress=3)
